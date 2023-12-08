@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title>Liste télé de momo henni</title>
+
+    </head>
+    <body>
+        <h1>La liste des télé desiré et acheter de momo henni</h1>
+        <h2>Télé desiré</h2>
+        <table>
+            <thead><th>Modèle</th>
+            <th>Prix</th>
+            <th>taille</th>
+            <th>acheter</th>
+            </thead>
+            <tBody>
+                <% for(var i=0;i< tv.length;i+=1) {%>
+                    <tr>
+                    <%  if(tv[i].acheter==0){%>
+                        <td><%= tv[i].marque %></td>
+                        <td><%= tv[i].prix %></td>
+                        <td><%= tv[i].taille %></td>
+                        <td><a href="/acheter?buy=<%=tv[i].id%>" id="buy">acheter</a></td>
+                    <%}%>
+                    </tr>
+                <%}%>
+            </tBody>
+        </table>
+        <h2>Télé acheté</h2>
+        <h3>Télé encore fonctionnel</h3>
+        <table>
+            <thead><th>Modèle</th>
+                <th>Prix</th>
+                <th>taille</th>
+                <th>Casser la télé</th>
+            </thead>
+            <tBody>
+                <% for(var i=0;i<tv.length;i+=1) {%>
+                    <tr>
+                    <%  if(tv[i].acheter==1){%>
+                        <% if(tv[i].casser==0) {%>
+                            <td><%= tv[i].marque %></td>
+                            <td><%= tv[i].prix %></td>
+                            <td><%= tv[i].taille %></td>
+                            <td><form action="/casser" method="get">
+                                <input type="hidden" name="casseur" value="<%=tv[i].id%>" />
+                                <input type="text" id="casser" name="casser" placeholder="Comment avez vous casser votre tv" required>
+                                <button type="submit" id="button">casser</button>
+                            </form></td>
+                        <%}%>
+                    <%}%>
+                    </tr>
+                <%}%>
+            </tBody>
+        </table>
+        <h3>Télé non fonctionnel</h3>
+        <table>
+            <thead><th>Modèle</th>
+                <th>Prix</th>
+                <th>taille</th>
+                <th>comment</th></thead>
+            <tBody>
+                <% for(var i=0;i<tv.length;i+=1) {%>
+                    <tr>
+                    <%  if(tv[i].acheter==1){%>
+                        <% if(tv[i].casser==1){ %>
+                            <td><%= tv[i].marque %></td>
+                            <td><%= tv[i].prix %></td>
+                            <td><%= tv[i].taille %></td>
+                            <td><%= tv[i].comment %></td>
+                        <%}%>
+                    <%}%>
+                    </tr>
+                <%}%>
+            </tBody>
+        </table>
+        <h2>argent dépenser dans des télé</h2>
+        <p>mohamed henni a dépenser <%= String(prix_tele) %></p>
+        <h2>ajout de nouvelle télé</h2>
+        <form action="/ajout" method="post">
+            <input type="text" id="marque" name="marque"  placeholder="Nouvelle télé" required><br>
+            <input type="int" id ="prix" name="prix" placeholder="prix de la tv" required><br>
+            <input type="int" id ="size" name="size" placeholder="Taille de la tv" required><br>
+            <button type="submit" id="button">Ajouter</button>
+        </form>
+    </body>
+</html>
